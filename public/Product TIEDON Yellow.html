@@ -34,22 +34,26 @@
     </a>
   </div>
 
-  <div data-screen-label="Product — TIED∆N Yellow Outfit" style="padding: 8px 22px 72px;">
-    <div style="position: relative; aspect-ratio: 3/4; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffc700 100%); border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-      <div style="text-align: center; color: #000; font-size: 11px; font-weight: 700; letter-spacing: 0.1em;">TIED∆N<br/>YELLOW OUTFIT</div>
+  <div data-screen-label="Product — TIED∆N Short Set" style="padding: 8px 22px 72px;">
+    <div style="position: relative; aspect-ratio: 3/4; background: #0d0c0f; border: 1px solid rgba(255,255,255,0.08); overflow: hidden;">
+      <sc-if value="{{ productsReady }}" hint-placeholder-val="{{ false }}">
+        <img src="{{ activeColor.src }}" alt="{{ activeColor.name }} TIED∆N short set" style="width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: opacity 0.25s ease;" />
+      </sc-if>
     </div>
 
     <div style="margin-top: 24px;">
-      <div style="font-size: 11px; letter-spacing: 0.28em; color: #ffd700; font-weight: 700;">TIED∆N</div>
-      <h1 style="font-family: 'Anton', sans-serif; font-size: clamp(26px, 8vw, 34px); margin: 12px 0 0 0; color: #fff; text-transform: uppercase; line-height: 1.15;">ELECTRIC YELLOW OUTFIT</h1>
-      <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px;">T-shirt & Shorts Set #24</div>
+      <div style="font-size: 11px; letter-spacing: 0.28em; color: #c084fc; font-weight: 700;">PURPLE COLUMBUS × TIED∆N</div>
+      <h1 style="font-family: 'Anton', sans-serif; font-size: clamp(26px, 8vw, 34px); margin: 12px 0 0 0; color: #fff; text-transform: uppercase; line-height: 1.15;">TIED∆N SHORT SET</h1>
+      <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 8px;">T-shirt & shorts set #24</div>
       <div style="font-family: 'Anton', sans-serif; font-size: 26px; color: #fff; margin-top: 16px;">$145</div>
     </div>
 
     <div style="margin-top: 28px;">
-      <div style="font-size: 11px; letter-spacing: 0.18em; color: rgba(255,255,255,0.6); font-weight: 700; margin-bottom: 12px;">STYLE</div>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button style="min-width: 52px; height: 46px; cursor: pointer; padding: 0 14px; background: #ffd700; color: #000; border: 2px solid #fff; font-size: 13px; font-weight: 700; font-family: 'Barlow', sans-serif; letter-spacing: 0.06em; transition: all 0.2s ease;">SET</button>
+      <div style="font-size: 11px; letter-spacing: 0.18em; color: rgba(255,255,255,0.6); font-weight: 700; margin-bottom: 12px;">COLOR — {{ activeColor.label }}</div>
+      <div style="display: flex; gap: 12px;">
+        <sc-for list="{{ colors }}" as="color" hint-placeholder-count="2">
+          <button data-color-id="{{ color.id }}" onClick="{{ handleColorClick }}" style="width: 32px; height: 32px; border-radius: 50%; cursor: pointer; padding: 0; background: {{ color.swatch }}; border: {{ color.borderStyle }}; transition: border-color 0.2s ease, transform 0.2s ease;" style-hover="transform: scale(1.1);"></button>
+        </sc-for>
       </div>
     </div>
 
@@ -69,22 +73,27 @@
     <div style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px;">
       <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #fff; margin-bottom: 12px;">DETAILS</div>
       <div style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.6);">
-        Vibrant electric yellow premium t-shirt paired with matching shorts. Features lightning bolt TIED∆N branding and #24 championship number. Complete outfit set with embroidered details. Limited edition — exclusive drop.
+        TIED∆N t-shirt and mesh shorts set with lightning bolt branding and #24 star patch. Electric yellow or vintage-washed black colorways. Premium heavyweight cotton tee, basketball-cut shorts. Limited run — no restocks.
       </div>
     </div>
   </div>
 
   <div style="width: 100%; background: #050406; padding: 32px 22px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.04em;">
-    © 2026 TIED∆N. All Rights Reserved.
+    © 2026 Purple Columbus. All Rights Reserved.
   </div>
 </div>
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:1400}}">
 class Component extends DCLogic {
-  state = { sizeId: 'M', added: false };
+  state = { colorId: 'yellow', sizeId: 'M', added: false };
+  colorDefs = [
+    { id: 'yellow', label: 'YELLOW', swatch: '#ffd700', src: './assets/tiedon-yellow.png' },
+    { id: 'black', label: 'BLACK', swatch: '#2a2a2a', src: './assets/tiedon-black.png' },
+  ];
   sizeIds = ['S', 'M', 'L', 'XL', '2XL'];
 
+  handleColorClick = (e) => this.setState({ colorId: e.currentTarget.dataset.colorId, added: false });
   handleSizeClick = (e) => this.setState({ sizeId: e.currentTarget.dataset.sizeId, added: false });
 
   getCartCount() {
@@ -95,21 +104,30 @@ class Component extends DCLogic {
   }
 
   handleAddToCart = () => {
+    const active = this.colorDefs.find(c => c.id === this.state.colorId) || this.colorDefs[0];
     try {
       const cart = JSON.parse(localStorage.getItem('pc_cart') || '[]');
-      cart.push({ name: 'TIED∆N ELECTRIC YELLOW OUTFIT', size: this.state.sizeId, price: '$145', img: 'yellow-outfit.png' });
+      cart.push({ name: 'TIED∆N SHORT SET', color: active.label, size: this.state.sizeId, price: '$145', img: active.src });
       localStorage.setItem('pc_cart', JSON.stringify(cart));
     } catch (e) {}
     this.setState({ added: true });
   };
 
   renderVals() {
+    const active = this.colorDefs.find(c => c.id === this.state.colorId) || this.colorDefs[0];
     return {
+      productsReady: true,
       cartCount: this.getCartCount(),
       handleAddToCart: this.handleAddToCart,
       addToCartLabel: this.state.added ? 'ADDED ✓' : 'ADD TO CART',
       addToCartBg: this.state.added ? '#5e1f8f' : '#9b30ff',
+      activeColor: { ...active, name: active.label },
+      handleColorClick: this.handleColorClick,
       handleSizeClick: this.handleSizeClick,
+      colors: this.colorDefs.map(c => ({
+        ...c,
+        borderStyle: c.id === this.state.colorId ? '2px solid #fff' : '2px solid rgba(255,255,255,0.15)',
+      })),
       sizes: this.sizeIds.map(id => ({
         id,
         bg: id === this.state.sizeId ? '#fff' : 'transparent',

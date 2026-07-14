@@ -35,8 +35,8 @@
   </div>
 
   <div data-screen-label="Product — Panther Collection" style="padding: 8px 22px 72px;">
-    <div style="position: relative; aspect-ratio: 3/4; background: linear-gradient(135deg, #d4c4b0 0%, #e8dcc8 50%, #d4c4b0 100%); border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-      <div style="text-align: center; color: #000; font-size: 11px; font-weight: 700; letter-spacing: 0.1em;">PURPLE<br/>COLUMBUS<br/>PANTHER SET</div>
+    <div style="position: relative; aspect-ratio: 3/4; background: #0d0c0f; border: 1px solid rgba(255,255,255,0.08); overflow: hidden;">
+      <img src="./assets/panther-cream.png" alt="Panther Collection cream sweatshirt and shorts set" style="width: 100%; height: 100%; object-fit: cover; object-position: top center;" />
     </div>
 
     <div style="margin-top: 24px;">
@@ -97,7 +97,7 @@ class Component extends DCLogic {
   handleAddToCart = () => {
     try {
       const cart = JSON.parse(localStorage.getItem('pc_cart') || '[]');
-      cart.push({ name: 'PURPLE COLUMBUS PANTHER COLLECTION', size: this.state.sizeId, price: '$100', img: 'panther-set.png' });
+      cart.push({ name: 'PURPLE COLUMBUS PANTHER COLLECTION', size: this.state.sizeId, price: '$100', img: './assets/panther-cream.png' });
       localStorage.setItem('pc_cart', JSON.stringify(cart));
     } catch (e) {}
     this.setState({ added: true });

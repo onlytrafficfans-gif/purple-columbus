@@ -252,7 +252,7 @@ class Component extends DCLogic {
     email: '',
     subscribed: false,
     menuOpen: false,
-    selections: { panther: 'cream', 'tiedon-yellow': 'yellow', 'tiedon-black': 'black', tracksuit: 'red', varsity: 'green', joggers: 'blue' },
+    selections: { panther: 'cream', tiedon: 'yellow', tracksuit: 'red', varsity: 'green', joggers: 'blue' },
   };
 
   toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
@@ -271,27 +271,18 @@ class Component extends DCLogic {
       style: 'Cream sweatshirt & shorts',
       price: '$100',
       colors: [
-        { id: 'cream', name: 'Cream', swatch: '#d4c4b0', src: (window.__resources && window.__resources.tracksuitBrown) || './assets/tracksuit-brown.png' },
+        { id: 'cream', name: 'Cream', swatch: '#d4c4b0', src: './assets/panther-cream.png' },
       ],
     },
     {
-      id: 'tiedon-yellow',
+      id: 'tiedon',
       href: 'Product TIEDON Yellow.html',
-      name: 'TIED∆N ELECTRIC YELLOW',
+      name: 'TIED∆N SHORT SET',
       style: 'T-shirt & shorts set #24',
       price: '$145',
       colors: [
-        { id: 'yellow', name: 'Yellow', swatch: '#ffd700', src: (window.__resources && window.__resources.tracksuitOrange) || './assets/tracksuit-orange.png' },
-      ],
-    },
-    {
-      id: 'tiedon-black',
-      href: 'Product TIEDON Black.html',
-      name: 'TIED∆N FAMILY RIDE',
-      style: 'Black vintage outfit #24',
-      price: '$165',
-      colors: [
-        { id: 'black', name: 'Black', swatch: '#2a2a2a', src: (window.__resources && window.__resources.tracksuitGrey) || './assets/tracksuit-grey.png' },
+        { id: 'yellow', name: 'Yellow', swatch: '#ffd700', src: './assets/tiedon-yellow.png' },
+        { id: 'black', name: 'Black', swatch: '#2a2a2a', src: './assets/tiedon-black.png' },
       ],
     },
     {
@@ -334,7 +325,7 @@ class Component extends DCLogic {
 
   reviewDefs = [
     { name: 'Jazmynn Janeaa', quote: 'The fit is perfect and the material feels way more premium than I expected. Getting compliments every time I wear it — already planning my next order.', product: 'TRACKSUIT', stars: [1, 2, 3, 4, 5], photo: (window.__resources && window.__resources.reviewJazmynn) || './assets/review-jazmynn.png' },
-    { name: 'Bombay', quote: 'Super Impressed forreal. Fast shipping with tracking number — everything super professional. Did a professional photo shoot in Cali and it turned out hella fresh. Will be ordering again when you drop that winter gear!', product: 'PANTHER COLLECTION', stars: [1, 2, 3, 4, 5], photo: './uploads/review-bombay.png' },
+    { name: 'Bombay', quote: 'Super Impressed forreal. Fast shipping with tracking number — everything super professional. Did a professional photo shoot in Cali and it turned out hella fresh. Will be ordering again when you drop that winter gear!', product: 'PANTHER COLLECTION', stars: [1, 2, 3, 4, 5], photo: './assets/review-bombay.png' },
   ];
 
   handleColorClick = (e) => {
