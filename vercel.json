@@ -1,0 +1,12 @@
+{
+  "buildCommand": "echo 'Static site deployment'",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
+  ]
+}

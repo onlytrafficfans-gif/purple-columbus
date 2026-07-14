@@ -1,0 +1,10 @@
+{
+  "name": "purple-columbus",
+  "version": "1.0.0",
+  "description": "Purple Columbus - Premium Clothing Site",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'",
+    "start": "python -m http.server 3000"
+  }
+}
