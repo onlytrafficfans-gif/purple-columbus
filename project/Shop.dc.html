@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0a0a0c; }
+    * { box-sizing: border-box; }
+    ::selection { background: #9b30ff; color: #fff; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: #c084fc; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 100%; max-width: 480px; margin: 0 auto; min-height: 100vh; background: #0a0a0c; color: #f2f0f4; font-family: 'Barlow', sans-serif;">
+
+  <div style="width: 100%; background: #000; text-align: center; padding: 10px 12px; font-size: 10px; letter-spacing: 0.2em; font-weight: 600; color: #d9c8ea;">
+    LIMITED DROP. NO RESTOCKS. EVER.
+  </div>
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 22px;">
+    <a href="Purple Columbus Homepage.dc.html" style="display: flex; align-items: center; gap: 8px; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.14em;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="m11 18-6-6 6-6"></path></svg>
+      HOME
+    </a>
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <a href="Account.dc.html" aria-label="Account" style="display: flex;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </a>
+      <a href="Cart.dc.html" aria-label="Cart" style="display: flex; position: relative;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <sc-if value="{{ cartCount }}" hint-placeholder-val="{{ false }}">
+          <div style="position: absolute; top: -6px; right: -8px; background: #9b30ff; color: #fff; font-size: 9px; font-weight: 700; min-width: 14px; height: 14px; border-radius: 7px; display: flex; align-items: center; justify-content: center; padding: 0 3px;">{{ cartCount }}</div>
+        </sc-if>
+      </a>
+    </div>
+  </div>
+
+  <div data-screen-label="Shop" style="padding: 32px 22px 72px;">
+    <div style="font-size: 11px; letter-spacing: 0.32em; color: #c084fc; font-weight: 700; margin-bottom: 16px;">THE DROP</div>
+    <h1 style="font-family: 'Anton', sans-serif; font-size: clamp(30px, 9vw, 40px); margin: 0; color: #fff; text-transform: uppercase; line-height: 1.15;">SHOP ALL.</h1>
+    <p style="font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.55); margin: 16px 0 0 0;">Every piece from the current Purple Columbus drop.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 48px; margin-top: 44px;">
+      <sc-for list="{{ products }}" as="product" hint-placeholder-count="2">
+        <a href="{{ product.href }}" style="display: block;">
+          <div style="position: relative; aspect-ratio: 3/4; background: #0d0c0f; border: 1px solid rgba(255,255,255,0.08); overflow: hidden;">
+            <img src="{{ product.img }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover; object-position: top center;" />
+          </div>
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-top: 18px;">
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.04em; line-height: 1.4;">{{ product.name }}</div>
+              <div style="font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px;">{{ product.style }}</div>
+              <div style="font-size: 11px; color: #c084fc; margin-top: 6px; letter-spacing: 0.08em;">{{ product.colorCount }} COLORS</div>
+            </div>
+            <div style="font-family: 'Anton', sans-serif; font-size: 20px; color: #fff; flex-shrink: 0;">{{ product.price }}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="width: 100%; background: #050406; padding: 32px 22px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.04em;">
+    © 2026 Purple Columbus. All Rights Reserved.
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:1200}}">
+class Component extends DCLogic {
+  getCartCount() {
+    try {
+      const cart = JSON.parse(localStorage.getItem('pc_cart') || '[]');
+      return cart.reduce((n, item) => n + (item.qty || 1), 0);
+    } catch (e) { return 0; }
+  }
+
+  renderVals() {
+    return {
+      cartCount: this.getCartCount(),
+      products: [
+        { href: 'Product Tracksuit.dc.html', img: './assets/tracksuit-red.png', name: 'TIDE UP TRACKSUIT', style: 'Snap-side windbreaker set', price: '$100', colorCount: 3 },
+        { href: 'Product Varsity.dc.html', img: './assets/tracksuit-green.png', name: 'PC VARSITY TRACKSUIT', style: 'Chenille patch zip-up set', price: '$100', colorCount: 2 },
+        { href: 'Product Joggers.dc.html', img: './assets/joggers-blue.png', name: 'PURPLE COLUMBUS JOGGERS', style: 'Snap-side track pant', price: '$100', colorCount: 3 },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
