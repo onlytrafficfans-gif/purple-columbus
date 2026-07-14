@@ -3,6 +3,29 @@
 
   var DISMISS_KEY = 'pc_a2hs_dismissed';
 
+  function ensureHeadTags() {
+    if (!document.querySelector('link[rel="manifest"]')) {
+      var m = document.createElement('link');
+      m.rel = 'manifest';
+      m.href = './manifest.json';
+      document.head.appendChild(m);
+    }
+    if (!document.querySelector('meta[name="theme-color"]')) {
+      var t = document.createElement('meta');
+      t.name = 'theme-color';
+      t.content = '#9b30ff';
+      document.head.appendChild(t);
+    }
+    if (!document.querySelector('link[rel="apple-touch-icon"]')) {
+      var a = document.createElement('link');
+      a.rel = 'apple-touch-icon';
+      a.href = './assets/pc-logo-192.png';
+      document.head.appendChild(a);
+    }
+  }
+  ensureHeadTags();
+  setTimeout(ensureHeadTags, 2000);
+
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(function () {});
   }
