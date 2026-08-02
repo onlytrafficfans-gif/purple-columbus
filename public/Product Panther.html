@@ -101,12 +101,7 @@ class Component extends DCLogic {
   }
 
   handleAddToCart = () => {
-    try {
-      const cart = JSON.parse(localStorage.getItem('pc_cart') || '[]');
-      cart.push({ name: 'PURPLE COLUMBUS PANTHER COLLECTION', size: this.state.sizeId, price: '$100', img: './assets/panther-cream.png' });
-      localStorage.setItem('pc_cart', JSON.stringify(cart));
-    } catch (e) {}
-    this.setState({ added: true });
+    window.location.href = 'https://purplecolumbus.myshopify.com/collections/all';
   };
 
   renderVals() {
