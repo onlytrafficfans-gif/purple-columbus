@@ -64,7 +64,12 @@
             <div>
               <div style="font-size: 15px; font-weight: 700; color: #fff; letter-spacing: 0.04em; line-height: 1.4;">{{ product.name }}</div>
               <div style="font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px;">{{ product.style }}</div>
-              <div style="font-size: 11px; color: #c084fc; margin-top: 6px; letter-spacing: 0.08em;">{{ product.colorCount }} COLORS</div>
+              <sc-if value="{{ product.available }}">
+                <div style="font-size: 11px; color: #c084fc; margin-top: 6px; letter-spacing: 0.08em;">IN STOCK</div>
+              </sc-if>
+              <sc-if value="{{ product.available === false }}">
+                <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 6px; letter-spacing: 0.08em;">SOLD OUT</div>
+              </sc-if>
             </div>
             <div style="font-family: 'Anton', sans-serif; font-size: 20px; color: #fff; flex-shrink: 0;">{{ product.price }}</div>
           </div>
@@ -92,11 +97,21 @@ class Component extends DCLogic {
     return {
       cartCount: this.getCartCount(),
       products: [
-        { href: 'https://purplecolumbus.myshopify.com/collections/all', img: './assets/panther-cream.png', name: 'PANTHER COLLECTION', style: 'Cream sweatshirt & shorts set', price: '$100', colorCount: 1 },
-        { href: 'https://purplecolumbus.myshopify.com/collections/all', img: './assets/tiedon-yellow.png', name: 'TIED∆N SHORT SET', style: 'T-shirt & shorts set #24', price: '$145', colorCount: 2 },
-        { href: 'https://purplecolumbus.myshopify.com/collections/all', img: './assets/tracksuit-red.png', name: 'TIDE UP TRACKSUIT', style: 'Snap-side windbreaker set', price: '$100', colorCount: 3 },
-        { href: 'https://purplecolumbus.myshopify.com/collections/all', img: './assets/tracksuit-green.png', name: 'PC VARSITY TRACKSUIT', style: 'Chenille patch zip-up set', price: '$100', colorCount: 2 },
-        { href: 'https://purplecolumbus.myshopify.com/collections/all', img: './assets/joggers-blue.png', name: 'PURPLE COLUMBUS JOGGERS', style: 'Snap-side track pant', price: '$100', colorCount: 3 },
+        { href: 'https://purplecolumbus.myshopify.com/products/essential-cropped-hoodie', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/8fc528f6c9a9411492f9bd63de400b72.png?v=1784939495', name: 'ESSENTIAL CROPPED HOODIE', style: 'Cropped pullover hoodie', price: '$57.16', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/fleeced-sweatshirt', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/73cf402d3eca41618e2bcd8320c3273c.png?v=1785614945', name: 'FLEECED SWEATSHIRT', style: 'Fleece-lined crewneck', price: '$45.10', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/unisex-hoodie', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/unisex-premium-pullover-hoodie-black-front-6a59dd836a323.jpg?v=1784274326', name: 'PURPLE COLUMBUS UNISEX PREMIUM HOODIE', style: 'Premium pullover hoodie', price: '$56.88', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/utility-backpack', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/all-over-print-utility-backpack-white-front-6a59ebcce5f14.jpg?v=1784278003', name: 'PURPLE COLUMBUS UTILITY BACKPACK', style: 'All-over print utility pack', price: '$58.50', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/youth-heavy-blend-hoodie', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/youth-heavy-blend-hoodie-black-front-6a59ec874cf4a.jpg?v=1784278168', name: 'PURPLE COLUMBUS YOUTH HEAVY BLEND HOODIE', style: 'Youth heavy blend hoodie', price: '$40.00', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/snow-washed-kids-t-shirt', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/bff1cd81a574480187203de621977efa.png?v=1785614568', name: 'SNOW WASHED KIDS\' T-SHIRT', style: 'Snow-washed kids\' tee', price: '$40.96', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/snow-washed-oversized-cotton-t-shirt', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/3815d214916c4d1580fcedd02f90c1ab.png?v=1784856948', name: 'SNOW WASHED OVERSIZED COTTON T-SHIRT', style: 'Oversized cotton tee', price: '$30.96', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/snow-washed-oversized-cotton-t-shirt-1', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/24800d919ca94e2bbcb7e32f6eba95cc.png?v=1785614732', name: 'SNOW WASHED OVERSIZED COTTON T-SHIRT', style: 'Oversized cotton tee, alt fit', price: '$40.96', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/snow-washed-raw-hem-t-shirt', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/0e94eca6eff5425d8fc169e82ca4d703.png?v=1784939395', name: 'SNOW WASHED RAW-HEM T-SHIRT', style: 'Raw-hem cotton tee', price: '$31.96', available: true },
+        { href: 'https://purplecolumbus.myshopify.com/products/hoodie', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/ChatGPTImageJul16_2026_01_02_02PM.png?v=1784232148', name: 'PURPLE COLUMBUS SIGNATURE FIT', style: 'Signature pullover hoodie', price: '$100.00', available: false },
+        { href: 'https://purplecolumbus.myshopify.com/products/full-set', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/ChatGPTImageJul16_2026_01_06_39PM.png?v=1784236854', name: 'PURPLE COLUMBUS HERITAGE FIT', style: '2-piece heritage set', price: '$100.00', available: false },
+        { href: 'https://purplecolumbus.myshopify.com/products/set-1', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/adb0f12e-a398-4d0e-81e9-ca3f78be4e93_045c0b33-12d4-4fa3-9c48-5c22cd6ab564.png?v=1784232372', name: 'PURPLE COLUMBUS ESSENTIAL FIT', style: '2-piece essential set', price: '$80.00', available: false },
+        { href: 'https://purplecolumbus.myshopify.com/products/asset-pack-91471085570-example-product-1', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/4516873a0b66d211de804ce1a530cf14.png?v=1785640932', name: 'GRAFFITI-PRINT OVERSIZED HOODIE BLACK', style: 'Oversized graphic hoodie', price: '$78.00', available: false },
+        { href: 'https://purplecolumbus.myshopify.com/products/asset-pack-91471085570-example-product-2', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/af7b7cea08158de4c354446837b5f958.png?v=1785640934', name: 'LAYERED LONG-SLEEVE TEE SMOKE PURPLE', style: 'Layered long-sleeve tee', price: '$54.00', available: false },
+        { href: 'https://purplecolumbus.myshopify.com/products/asset-pack-91471085570-example-product-3', img: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/dc9cee1ed27efe5417c1a5d69a706df5.png?v=1785640936', name: 'LOGO BEANIE STEEL LIGHT GREY', style: 'Ribbed knit beanie', price: '$32.00', available: false },
       ],
     };
   }

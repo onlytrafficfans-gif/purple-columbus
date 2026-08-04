@@ -9,14 +9,6 @@
   <meta name="theme-color" content="#9b30ff">
   <script src="./pwa-install.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="ext-resource-dependency" content="./assets/tracksuit-red.png" data-resource-id="tracksuitRed" />
-<meta name="ext-resource-dependency" content="./assets/tracksuit-grey.png" data-resource-id="tracksuitGrey" />
-<meta name="ext-resource-dependency" content="./assets/tracksuit-orange.png" data-resource-id="tracksuitOrange" />
-<meta name="ext-resource-dependency" content="./assets/tracksuit-green.png" data-resource-id="tracksuitGreen" />
-<meta name="ext-resource-dependency" content="./assets/tracksuit-brown.png" data-resource-id="tracksuitBrown" />
-<meta name="ext-resource-dependency" content="./assets/joggers-blue.png" data-resource-id="joggersBlue" />
-<meta name="ext-resource-dependency" content="./assets/joggers-red.png" data-resource-id="joggersRed" />
-<meta name="ext-resource-dependency" content="./assets/joggers-black.png" data-resource-id="joggersBlack" />
 <meta name="ext-resource-dependency" content="./assets/review-jazmynn.png" data-resource-id="reviewJazmynn" />
 <template id="__bundler_thumbnail" data-bg-color="#0a0a0c">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
@@ -258,7 +250,7 @@ class Component extends DCLogic {
     email: '',
     subscribed: false,
     menuOpen: false,
-    selections: { panther: 'cream', tiedon: 'yellow', tracksuit: 'red', varsity: 'green', joggers: 'blue' },
+    selections: { 'unisex-hoodie': 'black', 'utility-backpack': 'default', 'kids-tee': 'black', 'cropped-hoodie': 'black' },
   };
 
   toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
@@ -269,61 +261,46 @@ class Component extends DCLogic {
       return cart.reduce((n, item) => n + (item.qty || 1), 0);
     } catch (e) { return 0; }
   }
-  productDefs = [
+productDefs = [
     {
-      id: 'panther',
-      href: 'Product Panther.html',
-      name: 'PANTHER COLLECTION',
-      style: 'Cream sweatshirt & shorts',
-      price: '$100',
+      id: 'unisex-hoodie',
+      href: 'https://purplecolumbus.myshopify.com/products/unisex-hoodie',
+      name: 'UNISEX PREMIUM HOODIE',
+      style: 'Premium pullover hoodie',
+      price: '$56.88',
       colors: [
-        { id: 'cream', name: 'Cream', swatch: '#d4c4b0', src: './assets/panther-cream.png' },
+        { id: 'black', name: 'Black', swatch: '#1a1a1a', src: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/unisex-premium-pullover-hoodie-black-front-6a59dd836a323.jpg?v=1784274326' },
+        { id: 'white', name: 'White', swatch: '#f2f0f4', src: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/unisex-premium-pullover-hoodie-white-front-6a59dee812a00.jpg?v=1784274681' },
       ],
     },
     {
-      id: 'tiedon',
-      href: 'Product TIEDON Yellow.html',
-      name: 'TIED∆N SHORT SET',
-      style: 'T-shirt & shorts set #24',
-      price: '$145',
+      id: 'utility-backpack',
+      href: 'https://purplecolumbus.myshopify.com/products/utility-backpack',
+      name: 'UTILITY BACKPACK',
+      style: 'All-over print utility pack',
+      price: '$58.50',
       colors: [
-        { id: 'yellow', name: 'Yellow', swatch: '#ffd700', src: './assets/tiedon-yellow.png' },
-        { id: 'black', name: 'Black', swatch: '#2a2a2a', src: './assets/tiedon-black.png' },
+        { id: 'default', name: 'Default', swatch: '#3a3a3a', src: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/all-over-print-utility-backpack-white-front-6a59ebcce5f14.jpg?v=1784278003' },
       ],
     },
     {
-      id: 'tracksuit',
-      href: 'Product Tracksuit.dc.html',
-      name: 'TIDE UP TRACKSUIT',
-      style: 'Snap-side windbreaker set',
-      price: '$100',
+      id: 'kids-tee',
+      href: 'https://purplecolumbus.myshopify.com/products/snow-washed-kids-t-shirt',
+      name: "SNOW WASHED KIDS' T-SHIRT",
+      style: "Kids' washed tee",
+      price: '$40.96',
       colors: [
-        { id: 'red', name: 'Red', swatch: '#c0272d', src: (window.__resources && window.__resources.tracksuitRed) || './assets/tracksuit-red.png' },
-        { id: 'grey', name: 'Grey', swatch: '#9a9a9e', src: (window.__resources && window.__resources.tracksuitGrey) || './assets/tracksuit-grey.png' },
-        { id: 'orange', name: 'Orange', swatch: '#e8791f', src: (window.__resources && window.__resources.tracksuitOrange) || './assets/tracksuit-orange.png' },
+        { id: 'black', name: 'Black', swatch: '#1a1a1a', src: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/bff1cd81a574480187203de621977efa.png?v=1785614568' },
       ],
     },
     {
-      id: 'varsity',
-      href: 'Product Varsity.dc.html',
-      name: 'PC VARSITY TRACKSUIT',
-      style: 'Chenille patch zip-up set',
-      price: '$100',
+      id: 'cropped-hoodie',
+      href: 'https://purplecolumbus.myshopify.com/products/essential-cropped-hoodie',
+      name: 'ESSENTIAL CROPPED HOODIE',
+      style: 'Cropped fit hoodie',
+      price: '$57.16',
       colors: [
-        { id: 'green', name: 'Green', swatch: '#2f4a2f', src: (window.__resources && window.__resources.tracksuitGreen) || './assets/tracksuit-green.png' },
-        { id: 'brown', name: 'Brown', swatch: '#5a4230', src: (window.__resources && window.__resources.tracksuitBrown) || './assets/tracksuit-brown.png' },
-      ],
-    },
-    {
-      id: 'joggers',
-      href: 'Product Joggers.dc.html',
-      name: 'PURPLE COLUMBUS JOGGERS',
-      style: 'Snap-side track pant',
-      price: '$100',
-      colors: [
-        { id: 'blue', name: 'Blue', swatch: '#1e3fd1', src: (window.__resources && window.__resources.joggersBlue) || './assets/joggers-blue.png' },
-        { id: 'red', name: 'Red', swatch: '#c0272d', src: (window.__resources && window.__resources.joggersRed) || './assets/joggers-red.png' },
-        { id: 'black', name: 'Black', swatch: '#1a1a1a', src: (window.__resources && window.__resources.joggersBlack) || './assets/joggers-black.png' },
+        { id: 'black', name: 'Black', swatch: '#1a1a1a', src: 'https://cdn.shopify.com/s/files/1/1022/3212/9717/files/8fc528f6c9a9411492f9bd63de400b72.png?v=1784939495' },
       ],
     },
   ];
